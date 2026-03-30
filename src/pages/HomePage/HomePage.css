@@ -152,6 +152,30 @@
   }
 }
 
+@media (max-width: 375px) {
+  .hero-section__content {
+    padding: clamp(16px, 4vw, 20px) clamp(12px, 4vw, 16px) clamp(20px, 5vh, 32px);
+  }
+
+  .hero-section__title {
+    font-size: clamp(1.35rem, 6.2vw, 1.6rem);
+    line-height: 1.12;
+    margin-bottom: 12px;
+  }
+
+  .hero-section__subtitle {
+    font-size: 0.9375rem;
+    line-height: 1.5;
+    margin-bottom: 20px;
+  }
+
+  .hero-section__actions .hero-section__cta {
+    font-size: 1.1rem;
+    letter-spacing: 0.02em;
+    padding: 10px 6px;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .hero-section {
     background-attachment: scroll;
@@ -1046,7 +1070,7 @@
   }
 
   .mid-bridge__line {
-    font-size: clamp(0.8rem, 3.8vw, 1.35rem);
+    font-size: clamp(1.5rem, 3.8vw, 1.35rem);
     letter-spacing: 0.05em;
   }
 

@@ -134,6 +134,7 @@ function Layout() {
       />
       <Header
         bannerHidden={bannerHidden}
+        topBannerExpanded={bannerExpanded}
         onMenuOpenChange={setNavMenuOpen}
         menukortHeaderCenter={menukortHeaderCenter}
       />

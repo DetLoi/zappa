@@ -22,11 +22,21 @@
   right: 0;
   top: var(--layout-banner-offset, var(--banner-height));
   z-index: 20;
-  transition: transform 0.3s ease, top 0.3s ease;
+  transition:
+    transform 0.3s ease,
+    top 0.3s ease,
+    opacity 0.35s ease;
   padding: 50px 32px;
 }
 
+.header--top-banner-expanded {
+  opacity: 0;
+  pointer-events: none;
+}
+
 .header--menu-open {
+  opacity: 1;
+  pointer-events: auto;
   z-index: 200;
 }
 
@@ -149,6 +159,10 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
+  .header {
+    transition: transform 0.3s ease, top 0.3s ease;
+  }
+
   .header__burger-line {
     transition: none;
   }
@@ -671,7 +685,7 @@
   }
 
   .header--banner-hidden .header__drawer {
-    padding-top: calc(var(--header-bar-height) + 12px);
+    padding-top: 70px
   }
 
   .header__drawer-aside {

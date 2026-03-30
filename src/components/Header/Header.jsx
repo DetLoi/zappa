@@ -3,7 +3,7 @@ import { NavLink, useLocation } from 'react-router-dom'
 import Container from '../Container/Container'
 import './Header.css'
 
-function Header({ bannerHidden = false, onMenuOpenChange, menukortHeaderCenter = null }) {
+function Header({ bannerHidden = false, topBannerExpanded = false, onMenuOpenChange, menukortHeaderCenter = null }) {
   const [menuOpen, setMenuOpen] = useState(false)
   const [drawerClosing, setDrawerClosing] = useState(false)
   const drawerClosingRef = useRef(false)
@@ -20,6 +20,7 @@ function Header({ bannerHidden = false, onMenuOpenChange, menukortHeaderCenter =
 
   const headerClass = [
     bannerHidden ? 'header header--banner-hidden' : 'header',
+    topBannerExpanded ? 'header--top-banner-expanded' : '',
     menuOpen ? 'header--menu-open' : '',
     menukortHeaderCenter ? 'header--menukort-tabs' : '',
   ]
