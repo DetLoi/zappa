@@ -21,10 +21,9 @@
   border-bottom: 1px solid rgba(230, 197, 143, 0.25);
   box-sizing: border-box;
   margin: 0;
-  /* Content clears fixed layers; fill extends to top of viewport behind them */
+  /* Top padding matches .events-page__hero */
   padding: calc(
-      var(--layout-banner-offset, var(--banner-height)) + var(--selskaber-header-clear) +
-        clamp(40px, 10vh, 88px)
+      var(--layout-banner-offset, var(--banner-height)) + 64px + clamp(40px, 10vh, 88px)
     )
     clamp(24px, 6vw, 48px) clamp(48px, 12vh, 100px);
   position: relative;

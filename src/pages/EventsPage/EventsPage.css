@@ -20,7 +20,7 @@
   box-sizing: border-box;
   margin: 0;
   padding: calc(
-      var(--layout-banner-offset, var(--banner-height)) + 164px + clamp(40px, 10vh, 88px)
+      var(--layout-banner-offset, var(--banner-height)) + 64px + clamp(40px, 10vh, 88px)
     )
     clamp(24px, 6vw, 48px) clamp(32px, 8vh, 72px);
   position: relative;

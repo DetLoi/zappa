@@ -69,6 +69,15 @@ function Layout() {
   const syncBannerOffset = () => {
     const el = topBannerRef.current
     if (!el) return
+    const expanded = el.classList.contains('top-banner--expanded')
+    // Collapsed: measure strip only — full el.offsetHeight can include the drawer's
+    // intrinsic size in some engines, inflating --layout-banner-offset and leaving a
+    // huge gap below the fixed header (e.g. menukort tabs on mobile).
+    if (!expanded) {
+      const strip = el.querySelector('.top-banner__strip')
+      setBannerOffsetPx(strip?.offsetHeight ?? el.offsetHeight)
+      return
+    }
     setBannerOffsetPx(el.offsetHeight)
   }
 
@@ -108,6 +117,10 @@ function Layout() {
 
   const bannerHidden = isBannerHidden || navMenuOpen
 
+  // When the strip is hidden or the menu is open, the header sits at top: 0 — page content
+  // must not still reserve banner height (e.g. menukort tabs + padding would sit ~1 strip too low).
+  const layoutBannerOffsetPx = bannerHidden ? 0 : bannerOffsetPx
+
   useEffect(() => {
     if (!bannerExpanded) return
     const onKey = (e) => {
@@ -120,7 +133,7 @@ function Layout() {
   return (
     <div
       className="layout"
-      style={{ '--layout-banner-offset': `${bannerOffsetPx}px` }}
+      style={{ '--layout-banner-offset': `${layoutBannerOffsetPx}px` }}
     >
       <div
         className={`top-banner-backdrop${bannerHidden ? ' top-banner-backdrop--hidden' : ''}`}

@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react'
+import { createPortal } from 'react-dom'
 import { Helmet } from 'react-helmet-async'
 import { useOutletContext } from 'react-router-dom'
 import menuBrunch1 from '../../assets/menu/menu-brunch-1.png'
@@ -51,7 +52,88 @@ function useIsLaptopMenukort() {
   return isLaptop
 }
 
-function MenukortCarousel({ pages, tabId, showDots = true, edgeClickNav = false }) {
+function requestOverlayFullscreen(el) {
+  if (!el) return Promise.resolve()
+  const req = el.requestFullscreen || el.webkitRequestFullscreen
+  return req ? req.call(el).catch(() => {}) : Promise.resolve()
+}
+
+function exitFullscreenIfActive() {
+  const d = document
+  if (d.fullscreenElement && d.exitFullscreen) return d.exitFullscreen().catch(() => {})
+  if (d.webkitFullscreenElement && d.webkitExitFullscreen) return d.webkitExitFullscreen().catch(() => {})
+  return Promise.resolve()
+}
+
+function MenukortImageLightbox({ src, onClose }) {
+  const rootRef = useRef(null)
+  const ignoreFsUntilRef = useRef(0)
+
+  useLayoutEffect(() => {
+    if (!src) return
+    ignoreFsUntilRef.current = Date.now() + 250
+    const el = rootRef.current
+    if (!el) return
+    const id = requestAnimationFrame(() => {
+      requestOverlayFullscreen(el)
+    })
+    return () => cancelAnimationFrame(id)
+  }, [src])
+
+  useEffect(() => {
+    if (!src) return
+    const onFsChange = () => {
+      if (Date.now() < ignoreFsUntilRef.current) return
+      if (document.fullscreenElement || document.webkitFullscreenElement) return
+      onClose()
+    }
+    document.addEventListener('fullscreenchange', onFsChange)
+    document.addEventListener('webkitfullscreenchange', onFsChange)
+    const onKey = (e) => {
+      if (e.key === 'Escape') onClose()
+    }
+    window.addEventListener('keydown', onKey)
+    const prevOverflow = document.body.style.overflow
+    document.body.style.overflow = 'hidden'
+    return () => {
+      document.removeEventListener('fullscreenchange', onFsChange)
+      document.removeEventListener('webkitfullscreenchange', onFsChange)
+      window.removeEventListener('keydown', onKey)
+      document.body.style.overflow = prevOverflow
+    }
+  }, [src, onClose])
+
+  if (!src) return null
+
+  return createPortal(
+    <div
+      ref={rootRef}
+      className="menukort-page__lightbox"
+      role="dialog"
+      aria-modal="true"
+      aria-label="Menu i fuld skærm"
+      onClick={onClose}
+    >
+      <button
+        type="button"
+        className="menukort-page__lightbox-close"
+        aria-label="Luk"
+        onClick={onClose}
+      >
+        ×
+      </button>
+      <img
+        className="menukort-page__lightbox-image"
+        src={src}
+        alt=""
+        onClick={(e) => e.stopPropagation()}
+      />
+    </div>,
+    document.body
+  )
+}
+
+function MenukortCarousel({ pages, tabId, showDots = true, edgeClickNav = false, onOpenFullscreen }) {
   const n = pages.length
   const extendedPages = useMemo(
     () => (n <= 1 ? pages : [pages[n - 1], ...pages, pages[0]]),
@@ -172,13 +254,20 @@ function MenukortCarousel({ pages, tabId, showDots = true, edgeClickNav = false 
                     style={slideW > 0 ? { flex: `0 0 ${slideW}px`, width: slideW, minWidth: slideW } : undefined}
                     aria-hidden={i !== extIndex}
                   >
-                    <img
-                      className="menukort-page__image menukort-page__image--carousel"
-                      src={page.src}
-                      alt=""
-                      loading={i === 1 ? 'eager' : 'lazy'}
-                      decoding="async"
-                    />
+                    <button
+                      type="button"
+                      className="menukort-page__image-button menukort-page__image-button--carousel"
+                      aria-label="Vis menu i fuld skærm"
+                      onClick={() => onOpenFullscreen?.(page.src)}
+                    >
+                      <img
+                        className="menukort-page__image menukort-page__image--carousel"
+                        src={page.src}
+                        alt=""
+                        loading={i === 1 ? 'eager' : 'lazy'}
+                        decoding="async"
+                      />
+                    </button>
                   </div>
                 )
               })}
@@ -237,7 +326,7 @@ function MenukortCarousel({ pages, tabId, showDots = true, edgeClickNav = false 
   )
 }
 
-function MenukortPanelContent({ tabId, pages, isLaptop }) {
+function MenukortPanelContent({ tabId, pages, isLaptop, onOpenFullscreen }) {
   const count = pages.length
 
   if (!isLaptop) {
@@ -245,13 +334,20 @@ function MenukortPanelContent({ tabId, pages, isLaptop }) {
       <ul className="menukort-page__list">
         {pages.map((page, index) => (
           <li key={`${tabId}-${index}`} className="menukort-page__item">
-            <img
-              className="menukort-page__image"
-              src={page.src}
-              alt=""
-              loading={index === 0 ? 'eager' : 'lazy'}
-              decoding="async"
-            />
+            <button
+              type="button"
+              className="menukort-page__image-button"
+              aria-label="Vis menu i fuld skærm"
+              onClick={() => onOpenFullscreen(page.src)}
+            >
+              <img
+                className="menukort-page__image"
+                src={page.src}
+                alt=""
+                loading={index === 0 ? 'eager' : 'lazy'}
+                decoding="async"
+              />
+            </button>
           </li>
         ))}
       </ul>
@@ -265,6 +361,7 @@ function MenukortPanelContent({ tabId, pages, isLaptop }) {
         tabId={tabId}
         showDots={tabId !== 'drikke'}
         edgeClickNav={tabId === 'drikke'}
+        onOpenFullscreen={onOpenFullscreen}
       />
     )
   }
@@ -278,13 +375,20 @@ function MenukortPanelContent({ tabId, pages, isLaptop }) {
     <ul className={listClass}>
       {pages.map((page, index) => (
         <li key={`${tabId}-${index}`} className="menukort-page__item">
-          <img
-            className="menukort-page__image"
-            src={page.src}
-            alt=""
-            loading="eager"
-            decoding="async"
-          />
+          <button
+            type="button"
+            className="menukort-page__image-button"
+            aria-label="Vis menu i fuld skærm"
+            onClick={() => onOpenFullscreen(page.src)}
+          >
+            <img
+              className="menukort-page__image"
+              src={page.src}
+              alt=""
+              loading="eager"
+              decoding="async"
+            />
+          </button>
         </li>
       ))}
     </ul>
@@ -324,6 +428,19 @@ function MenukortPage() {
   const setMenukortHeaderCenter = outlet?.setMenukortHeaderCenter
   const isLaptop = useIsLaptopMenukort()
   const [activeTab, setActiveTab] = useState('brunch')
+  const [lightboxSrc, setLightboxSrc] = useState(null)
+
+  const closeLightbox = useCallback(() => {
+    exitFullscreenIfActive().finally(() => setLightboxSrc(null))
+  }, [])
+
+  const openLightbox = useCallback((src) => {
+    setLightboxSrc(src)
+  }, [])
+
+  useEffect(() => {
+    setLightboxSrc(null)
+  }, [activeTab])
 
   useEffect(() => {
     if (!setMenukortHeaderCenter) return
@@ -373,7 +490,12 @@ function MenukortPage() {
               className="menukort-page__panel"
             >
               {activeTab === tab.id && (
-                <MenukortPanelContent tabId={tab.id} pages={MENU_PAGES[tab.id]} isLaptop={isLaptop} />
+                <MenukortPanelContent
+                  tabId={tab.id}
+                  pages={MENU_PAGES[tab.id]}
+                  isLaptop={isLaptop}
+                  onOpenFullscreen={openLightbox}
+                />
               )}
             </div>
           ))}
