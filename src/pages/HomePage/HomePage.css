@@ -152,7 +152,7 @@
   }
 }
 
-@media (max-width: 390px) {
+@media (max-width: 500px) {
   .hero-section__content {
     padding: clamp(16px, 4vw, 20px) clamp(12px, 4vw, 16px) clamp(20px, 5vh, 32px);
   }
