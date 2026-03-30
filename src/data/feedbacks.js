@@ -1,0 +1,123 @@
+export const FEEDBACKS = [
+  {
+    id: 'kevin-misfelt',
+    name: 'Kevin Misfelt',
+    stars: 5,
+    text: 'Rigtig god tapas. Hurtig og god service. Vi kommer igen',
+  },
+  {
+    id: 'd-loi-nguyen',
+    name: 'D Loi Spkz Nguyen',
+    stars: 5,
+    text: 'Bedste tapas jeg nogensinde har faaet! Utroligt positivt overrasket over deres Unikke hot wings og spring rolls som ikk kan bestilles andre steder, kommer igen det 100%',
+  },
+  {
+    id: 'janni-jonsson',
+    name: 'Janni Jønsson',
+    stars: 5,
+    text: 'Super god betjening og venlige ejere! Jeg kom dumpende ind fra gaden idag, ved at dø af varme og ville virkelig bare have en salat!! Ejeren sørger for at kokken får fikset en lækker salat sammen til mig trods det på nu ærende tidspunkt ikke er en del af menuen. Is vand blev serveret hurtigt og brød imens vi ventede på maden. 100% en anbefaling her fra!!',
+  },
+  {
+    id: 'birgitte-bredahl',
+    name: 'Birgitte Bredahl Sørensen',
+    stars: 5,
+    text: 'Det smagte virkelig god',
+  },
+  {
+    id: 'lene-marie',
+    name: 'Lene Marie Kristensen',
+    stars: 5,
+    text: 'Super lækker platte, sød og venlig servering, der blev sørget for glutenfri mad. Jeg kommer igen.',
+  },
+  {
+    id: 'laila-anna',
+    name: 'Laila Anna Pedersen',
+    stars: 5,
+    text: 'Vi bestilte tapas og frokostplatte. Prisen i forhold til kvalitet og kvantitet var god. Lækre friske råvare og mange forskellige retter. Kan klart anbefales.',
+  },
+  {
+    id: 'huseyin-sarigoz',
+    name: 'Hüseyin Sarigoz',
+    stars: 5,
+    text: 'Hyggelig spisested med rigtig god service kan varmt anbefales',
+  },
+  {
+    id: 'yonis-alabboody',
+    name: 'Yonis Al-abboody',
+    stars: 5,
+    text: 'Fantastisk mad og god service! Kan KUN skrive positivt om Zappa. Maden var ualmindeligt lækkert! Servicen var god, og stedet var vildt hyggeligt! Helt klart ikke sidste gang jeg spiser der.',
+  },
+  {
+    id: 'mikkel-sorensen',
+    name: 'Mikkel Sørensen',
+    stars: 5,
+    text: 'Et indbydende spisested med fascinerende indretning, service i aller højeste klasse samt et spændende menukort, hvor man kan lade sig friste af retter fra forskellige kulturer. Intet mindre end en fantastisk oplevelse!',
+  },
+  {
+    id: 'signe-lynggaard',
+    name: 'Signe Lynggaard Gregersen',
+    stars: 5,
+    text: 'Rigtig lækker mad, venlig betjening og gode portioner til prisen! Rolig, hyggelig og romantisk atmosfære. Vi kommer igen!',
+  },
+  {
+    id: 'jonas-eddie',
+    name: 'Jonas Eddie Stokholm Sørensen',
+    stars: 5,
+    text: 'Dejlig stemning og super flotte lokaler. Vi fik 7 tapas retter hver, hvilket var rigeligt. Vi mærkede tydeligt at der er lagt kærlighed i hver enkel anretning, og vi var imponerede fra start til slut. Vi glæder os allerede til at komme igen!',
+  },
+  {
+    id: 'leo-andersen',
+    name: 'Leo Andersen',
+    stars: 5,
+    text: 'Super betjening og virkelig lækker mad. Kan varmt anbefales.',
+  },
+  {
+    id: 'heidi-parsberg',
+    name: 'Heidi Parsberg Jensen',
+    stars: 5,
+    text: 'Den mest venlige betjening vi længe har oplevet. Indretningen er utrolig flot og stilfuld – fantastisk akustik. Og maden – spændende vietnamesisk aperitif – og den lækreste tapas – 5 store retter. Vi glæder os til at komme igen alene, med familie og venner.',
+  },
+  {
+    id: 'kamilla-kongsted',
+    name: 'Kamilla Kongsted Grønning',
+    stars: 5,
+    text: 'Utrolig lækket tapas vi fik, frisk og skønne retter. Betjeningen er heller ikke at klage over, utrolig venlig og imødekommende. Vi kommer helt sikkert igen!',
+  },
+  {
+    id: 'jesper-sachmann',
+    name: 'Jesper Sachmann',
+    stars: 5,
+    text: 'Lækker mad og super opmærksomme tjenere. Har spist der flere gange og et godt alternativ til de gængse steder på gaden og hotellet. Kan kun anbefale Zappa. Udefra er det svært at få et indtryk af lokalerne, men når man går derind er det et lækkert lounge miljø. Skal opleves.',
+  },
+  {
+    id: 'camilla-mark',
+    name: 'Camilla Mark Larsen',
+    stars: 5,
+    text: 'Super hyggeligt sted. Kommer klart igen. Fik små tapas retter og alt var lækkert. Man bliver fin mæt. Dejlig café stemning. Dejlig hygge musik og sød og frisk betjening. Helt klart et besøg værd.',
+  },
+  {
+    id: 'maj-britt',
+    name: 'Maj-Britt Johansen',
+    stars: 5,
+    text: 'Virkelig lækker tapas. Kan sagtens blive mæt',
+  },
+  {
+    id: 'maiken-ditlev',
+    name: 'Maiken Ditlev Olsen',
+    stars: 5,
+    text: 'Spændende menukort med bl.a. små tapas retter man selv kunne vælge. Virkelig lækkert og veltilberedt. Herudover venligt og imødekommende personale. Kan klart anbefales.',
+  },
+  {
+    id: 'susanne-berthelsen',
+    name: 'Susanne Berthelsen',
+    stars: 5,
+    text: 'Hyggelig stemning – sød og venlig betjening, som vil det bedste for sine kunder. Lækker og veltilberedt mad. Kommer helt sikkert igen',
+  },
+  {
+    id: 'jalal-anwari',
+    name: 'Jalal Anwari',
+    stars: 5,
+    text: 'Super god service og god burger!',
+  },
+]
+

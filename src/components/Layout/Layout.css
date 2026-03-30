@@ -1,0 +1,169 @@
+/* Block stacking: page content then footer in normal flow (no flex + margin-top:auto on footer,
+   which can pin the footer to the viewport and overlap long main content — e.g. Om Os pair strip). */
+.layout {
+  display: block;
+  max-width: 100%;
+  position: relative;
+}
+
+.layout__main {
+  overflow: visible;
+  width: 100%;
+}
+
+.top-banner-backdrop {
+  background: #000;
+  height: var(--banner-height);
+  left: 0;
+  opacity: 1;
+  pointer-events: none;
+  position: fixed;
+  right: 0;
+  top: 0;
+  transition: opacity 0.35s ease;
+  z-index: 98;
+}
+
+.top-banner-backdrop--hidden {
+  opacity: 0;
+}
+
+.top-banner {
+  background-color: var(--color-champagne-gold);
+  box-sizing: border-box;
+  color: var(--color-charcoal-green);
+  display: flex;
+  flex-direction: column;
+  left: 0;
+  min-height: var(--banner-height);
+  position: fixed;
+  right: 0;
+  top: 0;
+  transform: translateY(0);
+  transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+  width: 100%;
+  z-index: 101;
+}
+
+.top-banner--hidden {
+  transform: translateY(-100%);
+}
+
+.top-banner__strip {
+  appearance: none;
+  background: transparent;
+  border: none;
+  box-sizing: border-box;
+  color: inherit;
+  cursor: pointer;
+  display: block;
+  flex-shrink: 0;
+  font: inherit;
+  height: var(--banner-height);
+  margin: 0;
+  padding: 0;
+  width: 100%;
+}
+
+.top-banner__strip:focus-visible {
+  outline: 2px solid var(--color-dark-emerald);
+  outline-offset: -2px;
+}
+
+.top-banner__inner {
+  align-items: center;
+  box-sizing: border-box;
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  height: 100%;
+  margin: 0 auto;
+  max-width: 1200px;
+  padding: 0 16px;
+  font-size: 0.85rem;
+}
+
+.top-banner__text {
+  text-align: center;
+  text-transform: uppercase;
+  font-weight: 600;
+}
+
+.top-banner__arrow {
+  display: block;
+  flex-shrink: 0;
+  height: 14px;
+  object-fit: contain;
+  transition: transform 0.35s ease;
+  width: auto;
+}
+
+.top-banner--expanded .top-banner__arrow {
+  transform: rotate(180deg);
+}
+
+.top-banner__drawer {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 0.4s ease;
+}
+
+.top-banner--expanded .top-banner__drawer {
+  grid-template-rows: 1fr;
+}
+
+.top-banner__drawer-inner {
+  min-height: 0;
+  overflow: hidden;
+}
+
+.top-banner-panel {
+  border-top: 1px solid rgba(42, 47, 44, 0.18);
+  box-sizing: border-box;
+  color: var(--color-charcoal-green);
+  padding: 20px 16px 24px;
+}
+
+.top-banner-panel .site-footer__inner {
+  gap: 28px 36px;
+}
+
+.top-banner-panel .site-footer__heading {
+  color: var(--color-charcoal-green);
+}
+
+.top-banner-panel .site-footer__link {
+  color: var(--color-dark-emerald);
+}
+
+.top-banner-panel .site-footer__link:hover {
+  color: var(--color-charcoal-green);
+}
+
+.top-banner-panel .site-footer__kitchen-note {
+  color: rgba(42, 47, 44, 0.88);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .top-banner,
+  .top-banner-backdrop {
+    transition: none;
+  }
+
+  .top-banner__drawer {
+    transition: none;
+  }
+
+  .top-banner__arrow {
+    transition: none;
+  }
+}
+
+.top-banner__dismiss {
+  background: transparent;
+  border: none;
+  color: inherit;
+  cursor: pointer;
+  font-size: 1rem;
+  padding: 2px 4px;
+}

@@ -1,0 +1,16 @@
+{
+  "name": "Café Zappa",
+  "short_name": "Zappa",
+  "description": "Restaurant og cocktailbar i Horsens",
+  "start_url": "/",
+  "display": "browser",
+  "background_color": "#1a2e1a",
+  "theme_color": "#c9a84c",
+  "icons": [
+    {
+      "src": "/zappalogo.png",
+      "sizes": "any",
+      "type": "image/png"
+    }
+  ]
+}

@@ -1,0 +1,520 @@
+/* Banner + fixed header (see Layout --layout-banner-offset, Header.css --header-bar-height) */
+.menukort-page {
+  --menukort-header-clear: 164px;
+  --menukort-fixed-offset: calc(
+    var(--layout-banner-offset, var(--banner-height)) + var(--menukort-header-clear)
+  );
+  background-color: var(--color-forest-green);
+  box-sizing: border-box;
+  /* Content starts below fixed top banner + header (not underneath them) */
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  padding-top: var(--menukort-fixed-offset);
+  max-width: 100%;
+  overflow-x: hidden;
+  width: 100%;
+}
+
+/* Laptop: header may grow when menu tabs wrap to two rows */
+@media (min-width: 921px) {
+  .menukort-page.menukort-page--laptop {
+    --menukort-header-clear: 200px;
+  }
+}
+
+.menukort-page__tabs-sticky {
+  background: var(--color-forest-green);
+  box-sizing: border-box;
+  position: sticky;
+  top: var(--menukort-fixed-offset);
+  width: 100%;
+  z-index: 15;
+}
+
+.menukort-page__tabs-inner {
+  box-sizing: border-box;
+  margin: 0 auto;
+  max-width: 900px;
+  padding: 0 16px;
+  width: 100%;
+}
+
+.menukort-page__tabs {
+  box-sizing: border-box;
+  display: flex;
+  flex-wrap: nowrap;
+  gap: 10px;
+  margin: 0 -16px;
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding: 32px 16px;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: thin;
+}
+
+.menukort-page__tab {
+  background: transparent;
+  border: 1px solid rgba(230, 197, 143, 0.45);
+  border-radius: 999px;
+  box-sizing: border-box;
+  color: var(--color-warm-cream);
+  cursor: pointer;
+  flex: 0 0 auto;
+  font-family: inherit;
+  font-size: 0.82rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  line-height: 1.2;
+  padding: 10px 18px;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.menukort-page__tab:hover {
+  border-color: var(--color-champagne-gold);
+  color: var(--color-champagne-gold);
+}
+
+.menukort-page__tab:focus-visible {
+  outline: 2px solid var(--color-soft-gold);
+  outline-offset: 2px;
+}
+
+.menukort-page__tab--active {
+  background: var(--color-champagne-gold);
+  border-color: var(--color-champagne-gold);
+  color: var(--color-charcoal-green);
+}
+
+.menukort-page__tab--active:hover {
+  background: var(--color-soft-gold);
+  border-color: var(--color-soft-gold);
+  color: var(--color-charcoal-green);
+}
+
+.menukort-page__panels {
+  background: var(--color-forest-green);
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  /* Fill viewport below fixed banner + header (mobile: below sticky tabs too) */
+  flex: 1 1 auto;
+  min-height: 0;
+  /* In-page scroll / focus: keep content below fixed banner + header */
+  scroll-margin-top: var(--menukort-fixed-offset);
+  width: 100%;
+}
+
+.menukort-page__content-inner {
+  box-sizing: border-box;
+  display: flex;
+  flex: 1 1 auto;
+  flex-direction: column;
+  margin: 0 auto;
+  max-width: min(1600px, 100%);
+  min-height: 0;
+  padding: 0 16px;
+  width: 100%;
+}
+
+.menukort-page__panel {
+  box-sizing: border-box;
+  display: flex;
+  flex: 1 1 auto;
+  flex-direction: column;
+  min-height: 0;
+}
+
+.menukort-page__panel[hidden] {
+  display: none;
+}
+
+.menukort-page__list {
+  display: flex;
+  flex: 1 1 auto;
+  flex-direction: column;
+  gap: clamp(20px, 4vw, 32px);
+  list-style: none;
+  margin: 0;
+  min-height: 0;
+  padding: 0;
+}
+
+.menukort-page__item {
+  align-items: center;
+  display: flex;
+  flex: 1 1 auto;
+  justify-content: center;
+  margin: 0;
+  max-width: 100%;
+  min-height: 0;
+  width: 100%;
+}
+
+.menukort-page__image {
+  box-sizing: border-box;
+  display: block;
+  height: auto;
+  margin-inline: auto;
+  max-height: 100%;
+  max-width: 100%;
+  object-fit: contain;
+  width: auto;
+}
+
+@media (min-width: 921px) {
+  .menukort-page__list--laptop-grid {
+    align-items: stretch;
+    display: grid;
+    flex: 1 1 auto;
+    gap: clamp(16px, 3vw, 28px);
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-rows: minmax(0, 1fr);
+    min-height: 0;
+  }
+
+  .menukort-page__list--laptop-grid .menukort-page__item {
+    min-height: 0;
+    min-width: 0;
+  }
+
+  .menukort-page__list--laptop-single {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-rows: minmax(0, 1fr);
+    justify-items: center;
+  }
+
+  .menukort-page__list--laptop-single .menukort-page__item {
+    margin-inline: auto;
+    max-width: 100%;
+    width: 100%;
+  }
+
+  .menukort-page__carousel {
+    display: flex;
+    flex: 1 1 auto;
+    flex-direction: column;
+    min-height: 0;
+    width: 100%;
+  }
+
+  .menukort-page__carousel-row {
+    align-items: stretch;
+    display: flex;
+    flex: 1 1 auto;
+    gap: clamp(8px, 2vw, 16px);
+    min-height: 0;
+    width: 100%;
+  }
+
+  .menukort-page__carousel-main {
+    display: flex;
+    flex: 1 1 auto;
+    flex-direction: column;
+    min-height: 0;
+    min-width: 0;
+  }
+
+  .menukort-page__carousel-btn--side {
+    align-items: center;
+    align-self: center;
+    background: transparent;
+    border: none;
+    border-radius: 8px;
+    box-sizing: border-box;
+    cursor: pointer;
+    display: inline-flex;
+    flex-shrink: 0;
+    justify-content: center;
+    min-height: 44px;
+    min-width: 44px;
+    padding: 6px;
+  }
+
+  .menukort-page__carousel-btn--side:hover {
+    background: rgba(230, 197, 143, 0.12);
+  }
+
+  .menukort-page__carousel-btn--side:focus-visible {
+    outline: 2px solid var(--color-soft-gold);
+    outline-offset: 2px;
+  }
+
+  .menukort-page__carousel-arrow {
+    display: block;
+    height: auto;
+    max-height: 100%;
+    object-fit: contain;
+    width: clamp(28px, 4vw, 40px);
+  }
+
+  .menukort-page__carousel-arrow--flip {
+    transform: scaleX(-1);
+  }
+
+  .menukort-page__carousel-viewport {
+    display: flex;
+    flex: 1 1 auto;
+    min-height: 0;
+    overflow: hidden;
+    position: relative;
+    width: 100%;
+  }
+
+  /* Drikkevarer: click left/right gutters (outside centered 50% slide); middle stays non-click-through */
+  .menukort-page__carousel-edge-hits {
+    inset: 0;
+    pointer-events: none;
+    position: absolute;
+    z-index: 2;
+  }
+
+  .menukort-page__carousel-hit {
+    background: transparent;
+    border: none;
+    box-sizing: border-box;
+    cursor: pointer;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    pointer-events: auto;
+    position: absolute;
+    top: 0;
+    width: 25%;
+  }
+
+  .menukort-page__carousel-hit--prev {
+    left: 0;
+  }
+
+  .menukort-page__carousel-hit--next {
+    right: 0;
+  }
+
+  .menukort-page__carousel-hit:focus {
+    outline: none;
+  }
+
+  .menukort-page__carousel-hit:focus-visible {
+    outline: 2px solid var(--color-soft-gold);
+    outline-offset: -2px;
+  }
+
+  .menukort-page__carousel-dots-wrap {
+    display: flex;
+    flex-shrink: 0;
+    justify-content: center;
+    padding-top: clamp(12px, 2.5vw, 20px);
+  }
+
+  .menukort-page__carousel-track {
+    display: flex;
+    flex-wrap: nowrap;
+    height: 100%;
+    min-height: 0;
+    transition: transform 0.38s ease;
+    width: max-content;
+  }
+
+  .menukort-page__carousel-track--no-tx {
+    transition: none;
+  }
+
+  .menukort-page__carousel-slide {
+    align-items: center;
+    align-self: stretch;
+    box-sizing: border-box;
+    display: flex;
+    flex-shrink: 0;
+    height: 100%;
+    isolation: isolate;
+    justify-content: center;
+    min-height: 0;
+    min-width: 0;
+    overflow: hidden;
+    padding: 0 2px;
+  }
+
+  .menukort-page__image--carousel {
+    height: auto;
+    margin-inline: auto;
+    max-height: 100%;
+    max-width: 100%;
+    width: auto;
+  }
+
+  /* Center slide: full clarity */
+  .menukort-page__carousel-slide--active .menukort-page__image--carousel {
+    filter: none;
+    mask-image: none;
+    opacity: 1;
+    -webkit-mask-image: none;
+  }
+
+  /* Left peek: dim + blur; fade stronger toward outer (left) edge */
+  .menukort-page__carousel-slide--peek-left .menukort-page__image--carousel {
+    filter: blur(8px);
+    mask-image: linear-gradient(
+      to left,
+      rgba(0, 0, 0, 0.2) 0%,
+      rgba(0, 0, 0, 0.55) 38%,
+      rgba(0, 0, 0, 0.92) 72%,
+      #000 100%
+    );
+    opacity: 0.42;
+    -webkit-mask-image: linear-gradient(
+      to left,
+      rgba(0, 0, 0, 0.2) 0%,
+      rgba(0, 0, 0, 0.55) 38%,
+      rgba(0, 0, 0, 0.92) 72%,
+      #000 100%
+    );
+  }
+
+  /* Right peek: dim + blur; fade stronger toward outer (right) edge */
+  .menukort-page__carousel-slide--peek-right .menukort-page__image--carousel {
+    filter: blur(8px);
+    mask-image: linear-gradient(
+      to right,
+      rgba(0, 0, 0, 0.2) 0%,
+      rgba(0, 0, 0, 0.55) 38%,
+      rgba(0, 0, 0, 0.92) 72%,
+      #000 100%
+    );
+    opacity: 0.42;
+    -webkit-mask-image: linear-gradient(
+      to right,
+      rgba(0, 0, 0, 0.2) 0%,
+      rgba(0, 0, 0, 0.55) 38%,
+      rgba(0, 0, 0, 0.92) 72%,
+      #000 100%
+    );
+  }
+
+  .menukort-page__carousel-btn {
+    background: transparent;
+    border: 2px solid var(--color-champagne-gold);
+    border-radius: 999px;
+    box-sizing: border-box;
+    color: var(--color-champagne-gold);
+    cursor: pointer;
+    flex-shrink: 0;
+    font-family: inherit;
+    font-size: 1.35rem;
+    font-weight: 600;
+    line-height: 1;
+    min-height: 44px;
+    min-width: 44px;
+    padding: 0 14px;
+  }
+
+  .menukort-page__carousel-btn:hover {
+    background: rgba(230, 197, 143, 0.14);
+  }
+
+  .menukort-page__carousel-btn:focus-visible {
+    outline: 2px solid var(--color-soft-gold);
+    outline-offset: 2px;
+  }
+
+  .menukort-page__carousel-dots {
+    align-items: center;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+  }
+
+  .menukort-page__carousel-dot {
+    background: rgba(246, 241, 232, 0.35);
+    border: 1px solid rgba(230, 197, 143, 0.5);
+    border-radius: 999px;
+    box-sizing: border-box;
+    cursor: pointer;
+    flex-shrink: 0;
+    height: 10px;
+    padding: 0;
+    width: 10px;
+  }
+
+  .menukort-page__carousel-dot--active {
+    background: var(--color-champagne-gold);
+    border-color: var(--color-champagne-gold);
+  }
+
+  .menukort-page__carousel-dot:focus-visible {
+    outline: 2px solid var(--color-soft-gold);
+    outline-offset: 2px;
+  }
+}
+
+@media (min-width: 921px) and (prefers-reduced-motion: reduce) {
+  .menukort-page__carousel-slide--peek-left .menukort-page__image--carousel,
+  .menukort-page__carousel-slide--peek-right .menukort-page__image--carousel {
+    filter: none;
+  }
+
+  .menukort-page__carousel-track {
+    transition: none;
+  }
+}
+
+.menukort-page__caption {
+  color: rgba(246, 241, 232, 0.72);
+  font-size: 0.82rem;
+  letter-spacing: 0.04em;
+  line-height: 1.45;
+  margin: 10px 0 0;
+  text-align: center;
+}
+
+@media (min-width: 921px) {
+  .menukort-page__tabs:not(.menukort-page__tabs--header) {
+    flex-wrap: nowrap;
+    justify-content: center;
+    margin: 0;
+    overflow-x: visible;
+  }
+}
+
+/* Menukort tabs in site header (≥921px only; DOM only on laptop) */
+.header__menukort-tabs-wrap {
+  box-sizing: border-box;
+  max-width: 100%;
+  min-width: 0;
+  opacity: 1;
+  /* Shrink-wrap tab group; parent .header__center flex-centers it on the full bar */
+  transition: opacity 0.22s ease;
+  width: max-content;
+}
+
+.header--menu-open .header__menukort-tabs-wrap {
+  opacity: 0;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .header__menukort-tabs-wrap {
+    transition: none;
+  }
+}
+
+.menukort-page__tabs--header {
+  align-items: center;
+  column-gap: 12px;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin: 0;
+  overflow: visible;
+  padding: 0;
+  row-gap: 10px;
+}
+
+/* Match .header__cta / .header__cta--outline sizing */
+.menukort-page__tabs--header .menukort-page__tab {
+  font-size: 0.9rem;
+  letter-spacing: normal;
+  line-height: 1.2;
+  padding: 10px 20px;
+}

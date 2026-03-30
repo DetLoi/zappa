@@ -1,0 +1,27 @@
+:root {
+  --font-script: 'Great Vibes', cursive;
+  --font-section-title: 'Square Peg', cursive;
+  --color-forest-green: #183f34;
+  --color-champagne-gold: #e6c58f;
+  --color-dark-emerald: #0f2e26;
+  --color-soft-gold: #f1d7a3;
+  --color-warm-cream: #f6f1e8;
+  --color-charcoal-green: #2a2f2c;
+  --banner-height: 40px;
+  --layout-banner-offset: var(--banner-height);
+}
+
+body {
+  background: black;
+  color: var(--color-warm-cream);
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  margin: 0;
+  min-height: 100vh;
+  min-height: 100dvh;
+  min-width: 320px;
+  overflow-x: hidden;
+}
+
+#root {
+  display: block;
+}
